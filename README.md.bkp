@@ -49,3 +49,5 @@ db.events_log.createIndex({
 }, {
    name: "events_log_index"
 });
+
+nohup npm start

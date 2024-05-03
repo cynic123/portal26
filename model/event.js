@@ -10,7 +10,7 @@ const eventsSchema = new mongoose.Schema({
   domain: { type: String, required: true },
   category: { type: String }
 },
-  { autoCreate: false }
+  { autoCreate: false, collection: 'events_log' }
 );
 
 const Event = mongoose.model('Events', eventsSchema);

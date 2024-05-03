@@ -1,0 +1,51 @@
+use events;
+db.createUser( { user: "portal26", pwd: "portal26", roles: [{ role: "readWrite", db: "events" }] } );
+
+db.createCollection("events_log", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: ["event_timestamp", "user_id", "domain", "tenant"],
+         properties: {
+            event_timestamp: {
+               bsonType: "date",
+               description: "Timestamp of the event",
+            },
+            tenant: {
+               bsonType: "string",
+               description: "Tenant of the event",
+            },
+            user_id: {
+               bsonType: "string",
+               description: "ID of the user",
+            },
+            url: {
+               bsonType: "string",
+               description: "URL related to the event",
+            },
+            body: {
+               bsonType: "string",
+               description: "Body of the event"
+            },
+            domain: {
+               bsonType: "string",
+               description: "Domain of the event",
+            },
+            category: {
+               bsonType: "string",
+               description: "Category of the event tenant",
+            }
+         }
+      }
+   }
+});
+
+db.events_log.createIndex({
+   event_timestamp: 1,
+   tenant: 1,
+   user_id: 1,
+   domain: 1,
+   category: 1
+}, {
+   name: "events_log_index"
+});

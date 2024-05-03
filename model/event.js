@@ -8,7 +8,7 @@ const eventsSchema = new mongoose.Schema({
   body: { type: String },
   update_timestamp: { type: Date },
   domain: { type: String, required: true },
-  category: { type: String }
+  category: { type: [String] }
 },
   { autoCreate: false, collection: 'events_log' }
 );

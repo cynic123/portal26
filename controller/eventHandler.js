@@ -1,5 +1,5 @@
 const { Event } = require('../model/event');
-const GetCategory = require('./webshrinker/webShrinker') 
+const GetCategory = require('./webshrinker/webShrinker');
 
 module.exports = async (req, res, next) => {
   const { tenant } = req.params;
@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
   console.log('tenant: ' + tenant);
   console.log('req body: ' + JSON.stringify(eventData));
 
+  //validations
   if (!tenant) {
     next(new Error('Param tenant is missing'));
   }
@@ -48,9 +49,11 @@ module.exports = async (req, res, next) => {
 
   const event = new Event({ ...eventData, event_timestamp: timeStamp, domain: domain, tenant: tenant });
   try {
-    await event.save();
+    const category = await GetCategory(domain); // get category from webshrinker
+    event.category = category;
+    await event.save(); //save event
     res.status(200).json({ 'status': 'success' });
   } catch (error) {
-    next(new Error(error));
+    next(error);
   }
 }

@@ -32,8 +32,11 @@ db.createCollection("events_log", {
                description: "Domain of the event",
             },
             category: {
-               bsonType: "string",
-               description: "Category of the event tenant",
+               bsonType: ["array", "null"],
+               description: "Array of categories for the event",
+               items: {
+                  bsonType: "string",
+               }
             }
          }
       }

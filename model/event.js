@@ -9,7 +9,9 @@ const eventsSchema = new mongoose.Schema({
   update_timestamp: { type: Date },
   domain: { type: String, required: true },
   category: { type: String }
-});
+},
+  { autoCreate: false }
+);
 
 const Event = mongoose.model('Events', eventsSchema);
 

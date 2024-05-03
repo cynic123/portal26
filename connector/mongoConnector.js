@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const options = {
+  auth: {
+    authSource: 'admin'
+  },
   poolsize: process.env.MONGO_POOL,
   user: process.env.MONGO_USER,
   pass: process.env.MONGO_PASS

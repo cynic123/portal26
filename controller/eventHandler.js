@@ -1,4 +1,5 @@
 const { Event } = require('../model/event');
+const GetCategory = require('./webshrinker/webShrinker') 
 
 module.exports = async (req, res, next) => {
   const { tenant } = req.params;

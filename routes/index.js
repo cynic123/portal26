@@ -16,7 +16,7 @@ router.get('/v1/*', async (req, res, next) => {
 router.post('/v1/:tenant/query/', queryHandler);
 
 // events requests
-router.post('/v1/webhooks/:tenant/events/new', eventHandler);
+router.post('/v1/webhooks/:tenant/events', eventHandler);
 
 module.exports = router;
 

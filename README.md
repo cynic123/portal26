@@ -95,6 +95,7 @@ API Usage:
     "category": "Information Technology"
 }
 '
+>
 >curl --location 'http://localhost:3000/v1/zepto/query' \
 --header 'Content-Type: application/json' \
 --data '{

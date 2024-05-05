@@ -99,10 +99,9 @@ API Usage:
 >curl --location 'http://localhost:3000/v1/zepto/query' \
 --header 'Content-Type: application/json' \
 --data '{
-    "category": "Information Technology",
-    "from_date": "2024-04-06",
+    "from_date": "2024-04-06", 
     "to_date": "2024-05-04",
     "user_id": "testUser",
-    "domain": "openai.com"
-}
-'
+    "domain": "chat.openai.com",
+    "category": "Information Technology"
+}'

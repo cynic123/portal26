@@ -3,6 +3,64 @@ Prequisites:
 1. node v16.14.0
 2. mongo v7.0.9
 
+Create mongo database and collection:
+-------------------------------------
+>use events;
+>
+>db.createUser( { user: "portal26", pwd: "portal26", roles: [{ role: "readWrite", db: "events" }] } );
+
+>db.createCollection("events_log", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: ["event_timestamp", "user_id", "domain", "tenant"],
+         properties: {
+            event_timestamp: {
+               bsonType: "date",
+               description: "Timestamp of the event",
+            },
+            tenant: {
+               bsonType: "string",
+               description: "Tenant of the event",
+            },
+            user_id: {
+               bsonType: "string",
+               description: "ID of the user",
+            },
+            url: {
+               bsonType: "string",
+               description: "URL related to the event",
+            },
+            body: {
+               bsonType: "string",
+               description: "Body of the event"
+            },
+            domain: {
+               bsonType: "string",
+               description: "Domain of the event",
+            },
+            category: {
+               bsonType: ["array", "null"],
+               description: "Array of categories for the event",
+               items: {
+                  bsonType: "string",
+               }
+            }
+         }
+      }
+   }
+});
+
+>db.events_log.createIndex({
+   event_timestamp: 1,
+   tenant: 1,
+   user_id: 1,
+   domain: 1,
+   category: 1
+}, {
+   name: "events_log_index"
+});
+
 Setup:
 ------
 1. git clone https://github.com/cynic123/portal26.git
@@ -14,7 +72,7 @@ API Usage:
 ----------
 **Event Webhook Endpoint:**
 
-curl --location 'http://localhost:3000/v1/webhooks/swiggy/events' \
+>curl --location 'http://localhost:3000/v1/webhooks/swiggy/events' \
 --header 'Content-Type: application/json' \
 --data '{
   "event_timestamp":"2024-01-11T01:42:50.234200+00:00",

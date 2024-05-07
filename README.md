@@ -1,7 +1,7 @@
 Prequisites:
 -------------
-1. node v16.14.0
-2. mongo v7.0.9
+1. node v16.14.0 (https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04)
+2. mongo v7.0.9 (https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/)
 
 Create mongo database and collection:
 -------------------------------------
